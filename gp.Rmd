@@ -1,0 +1,84 @@
+---
+title: 'Gaussian Processes'
+output: html_document
+---
+
+
+```{r gp, echo=F}
+library(DiagrammeR)
+gp_nodes = create_nodes(    
+  nodes = c('gpm','gpsq', 'gpexp','rkhs','ar1','ou'),
+  label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 
+            'RKHS', 'AR(p)', 'OU'),
+  type = 'a',
+  value = 1,
+  
+  style = 'filled',
+  shape = 'circle',
+  fixedsize=T,
+  distortion='',
+  color='darkred',
+  fillcolor='papayawhip',
+  fixedsize='',
+  fontcolor='gray35',
+  fontname='',
+  fontsize=3,
+  height='',
+  penwidth='',
+  peripheries='',
+  shape='',
+  sides='',
+  tooltip='',
+  width='',
+  x='',
+  y='')
+
+edges = create_edges(
+  from = c('ar1','ar1', 'gpsq','gpexp','gpexp'),
+  to = c('gpm','ou', 'gpm', 'ou','gpm'),
+  rel = c('a'),
+
+  arrowhead='dot',
+  arrowsize='.5',
+  arrowtail='',
+  color='salmon',
+  dir=c('', '','', 'none'),
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label=c('', ''),
+  minlen='',
+  penwidth='',
+  tailport='',
+  tooltip=c('Matern with ν fixed to p-1/2', 
+            'AR(p) is discretized version of', 
+            'Matern with ν = &infin;',
+            '',
+            '',
+            'Matern with ν = 1/2')
+)
+render_graph(create_graph(gp_nodes, edges))
+```
+
+## Connections to Gaussian processes.
+
+
+## Labels
+
+GP = Gaussian process
+Exp =  exponential covariance structure
+SqExp = squared exponential covariance structure
+Matern = Matern covariances structure
+OU = Ornstein-Uhlenbeck
+$\mathcal{l}$ = horizontal length-scale
+$\mathcal{\nu}$ = controls differentiability
+
+## References
+
+Rasmussen & Williams (2006). Gaussian Processes for Machine Learning.
+Murphy (2012). Machine Learning: A probabilistic perspective.
+
+### Stack 
+[AR-OU](http://math.stackexchange.com/questions/345773/how-the-ornstein-uhlenbeck-process-can-be-considered-as-the-continuous-time-anal)
+[Covariance Functions](https://en.wikipedia.org/wiki/Gaussian_process#Usual_covariance_functions)

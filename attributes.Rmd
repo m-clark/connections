@@ -1,0 +1,106 @@
+---
+title: "Untitled"
+author: "Michael Clark"
+date: "December 20, 2016"
+output: html_document
+---
+
+# Node df attributes
+
+## primary
+nodes — names,
+type —  not explained,
+label — optional label,
+value — misc att?,
+
+## standard atts
+distortion — the node distortion for any shape = polygon
+fillcolor — provide an X11 or hexadecimal color (append 2 digits to hex for alpha)
+fixedsize — true or false
+fontcolor — provide an X11 or hexadecimal color (append 2 digits to hex for alpha)
+fontname — the name of the font
+fontsize — the size of the font for the node label
+height — the height of the node
+penwidth — the thickness of the stroke for the shape
+peripheries — the number of peripheries (essentially, additional shape outlines)
+shape — the node shape (e.g., ellipse, polygon, circle, etc.)
+sides — if shape = polygon, the number of sides can be provided here
+style — usually given the value filled if you'd like to fill a node with a color
+tooltip — provide text here for an unstyled browser tooltip
+width — the width of the node
+x — the x position of the node (requires graph attr layout = neato to use)
+y — the y position of the node (requires graph attr layout = neato to use)
+
+
+# Edge df attributes
+
+## primary
+from —  originating node,
+to — destination node,
+rel — optional label for each edge,
+
+## standard atts
+arrowhead — the arrow style at the head end (e.g, normal, dot)
+arrowsize — the scaling factor for the arrowhead and arrowtail
+arrowtail — the arrow style at the tail end (e.g, normal, dot)
+color — the stroke color; an X11 color or a hex code (add 2 digits for alpha)
+dir — the direction; either forward, back, both, or none
+fontcolor — choose an X11 color or provide a hex code (append 2 digits for alpha)
+fontname — the name of the font
+fontsize — the size of the font for the node label
+headport — a cardinal direction for where the arrowhead meets the node
+label — label text for the line between nodes
+minlen — minimum rank distance between head and tail
+penwidth — the thickness of the stroke for the arrow
+tailport — a cardinal direction for where the tail is emitted from the node
+tooltip — provide text here for an edge tooltip
+
+
+```{r eval=F}
+node_df= create_nodes(
+  nodes = '',
+  type = '',
+  label = '',
+  value = '',
+  
+  distortion='',
+  fillcolor='',
+  fixedsize='',
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  height='',
+  penwidth='',
+  peripheries='',
+  shape='',
+  sides='',
+  style='',
+  tooltip='',
+  width='',
+  x='',
+  y=''
+)
+
+edge_df= create_edges(
+  from = '',
+  to = '',
+  rel = '',
+  
+  arrowhead='',
+  arrowsize='',
+  arrowtail='',
+  color='',
+  dir='',
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label='',
+  minlen='',
+  penwidth='',
+  tailport='',
+  tooltip=''
+
+)
+```
+
