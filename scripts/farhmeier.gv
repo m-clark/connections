@@ -1,0 +1,19 @@
+digraph farhmeier {
+  graph [rankdir=LR]
+
+  node [shape = circle, style=filled, fillcolor=salmon, color=darkred, width=.25, height=.25,
+        fontcolor=aliceblue, fontname=Roboto, fixedsize=true, fontsize='5%', alpha=.5]
+  regression; GAM; STAR; Spatial; 'Mixed Model'; 'Gaussian Process';
+
+  edge [color=black, penwidth=.5, arrowsize=.25, arrowhead=dot, alpha=.05, fontcolor=blue]
+  regression -> {GAM 'Mixed Model'};
+
+  edge [tootip='hello']
+  {GAM Spatial 'Mixed Model'} -> {STAR};
+  STAR -> 'Gaussian Process';
+
+
+  subgraph {
+     rank = same; 'GAM'; 'STAR';
+  }
+}
