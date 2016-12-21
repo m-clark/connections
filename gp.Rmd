@@ -7,8 +7,8 @@ output: html_document
 ```{r gp, echo=F}
 library(DiagrammeR)
 gp_nodes = create_nodes(    
-  nodes = c('gpm','gpsq', 'gpexp','rkhs','ar1','ou'),
-  label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 
+  nodes = c('gpm','gpsq', 'gpexp', 'GP', 'rkhs','ar1','ou'),
+  label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 'GP', 
             'RKHS', 'AR(p)', 'OU'),
   type = 'a',
   value = 1,
@@ -34,8 +34,8 @@ gp_nodes = create_nodes(
   y='')
 
 edges = create_edges(
-  from = c('ar1','ar1', 'gpsq','gpexp','gpexp'),
-  to = c('gpm','ou', 'gpm', 'ou','gpm'),
+  from = c('gpm','ar1', 'gpm','gpexp','gpm','rkhs','GP'),
+  to = c('ar1','ou', 'gpsq', 'ou','gpexp', 'GP', 'gpm'),
   rel = c('a'),
 
   arrowhead='dot',
@@ -55,8 +55,8 @@ edges = create_edges(
             'AR(p) is discretized version of', 
             'Matern with ν = &infin;',
             '',
-            '',
-            'Matern with ν = 1/2')
+            'Matern with ν = 1/2',
+            '')
 )
 render_graph(create_graph(gp_nodes, edges))
 ```
@@ -80,5 +80,6 @@ Rasmussen & Williams (2006). Gaussian Processes for Machine Learning.
 Murphy (2012). Machine Learning: A probabilistic perspective.
 
 ### Stack 
+
 [AR-OU](http://math.stackexchange.com/questions/345773/how-the-ornstein-uhlenbeck-process-can-be-considered-as-the-continuous-time-anal)
 [Covariance Functions](https://en.wikipedia.org/wiki/Gaussian_process#Usual_covariance_functions)
