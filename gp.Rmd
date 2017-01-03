@@ -7,9 +7,10 @@ output: html_document
 ```{r gp, echo=F}
 library(DiagrammeR)
 gp_nodes = create_nodes(    
-  nodes = c('gpm','gpsq', 'gpexp', 'GP', 'rkhs','ar1','ou'),
-  label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 'GP', 
-            'RKHS', 'AR(p)', 'OU'),
+  nodes = c('gpm','gpsq', 'gpexp', 'gprq', 'gplin', 'gpother', 'GP', 
+            'rkhs','ar1','ou', 'splines', 'GAM', 'SVM', 'NN', 'bayesreg'),
+  label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 'GP w/ RQ', 'GP w/ linear', 'GP w/ Other', 'GP', 
+            'RKHS', 'AR(p)', 'OU', 'Splines', 'GAM', 'SVM', 'NN', 'Bayesian \n Regression'),
   type = 'a',
   value = 1,
   
@@ -20,9 +21,9 @@ gp_nodes = create_nodes(
   color='darkred',
   fillcolor='papayawhip',
   fixedsize='',
-  fontcolor='gray35',
-  fontname='',
-  fontsize=3,
+  fontcolor='darkred',
+  fontname='Roboto',
+  fontsize=6,
   height='',
   penwidth='',
   peripheries='',
@@ -34,52 +35,85 @@ gp_nodes = create_nodes(
   y='')
 
 edges = create_edges(
-  from = c('gpm','ar1', 'gpm','gpexp','gpm','rkhs','GP'),
-  to = c('ar1','ou', 'gpsq', 'ou','gpexp', 'GP', 'gpm'),
+  from = c('gpm','ou', 'gpm','gpexp','gpm','rkhs','GP', 'gprq','GP', 'gpother', 
+           'SVM', 'NN', 'gpother', 'GAM', 'gpsq', 'GP', 'gplin', 'GP'),
+  to =   c('ar1','ar1', 'gpsq', 'ou','gpexp', 'GP', 'gpm','gpsq', 'gpother', 'splines', 
+           'gpother', 'gpother', 'GAM', 'splines', 'gpexp', 'gplin', 'bayesreg', 'gprq'),
   rel = c('a'),
 
   arrowhead='dot',
   arrowsize='.5',
   arrowtail='',
   color='salmon',
-  dir=c('', '','', 'none'),
+  dir=c('', '','', 'none', '', 'none', '', '', '', '', 
+        'none', 'none', '', '', '', '', 'none', ''),
   fontcolor='',
   fontname='',
   fontsize='',
   headport='',
   label=c('', ''),
   minlen='',
-  penwidth='',
+  penwidth='1.5',
   tailport='',
   tooltip=c('Matern with ν fixed to p-1/2', 
-            'AR(p) is discretized version of', 
+            'AR(p) is discretized version of OU', 
             'Matern with ν = &infin;',
             '',
             'Matern with ν = 1/2',
+            '',
+            '',
+            'RQ is a mixture of SQExp; &alpha; = &infin;',
+            '',
+            '',
+            '',
+            '',
+            'thin plate, duchon spline',
+            '',
             '')
 )
-render_graph(create_graph(gp_nodes, edges))
+render_graph(create_graph(gp_nodes, edges), height = 1200, width = 750)
 ```
 
-## Connections to Gaussian processes.
+## Connections to Gaussian processes
 
+Hover over the links for details on some connections.  Dots indicate 'special cases of'. Undirected connections suggest equivalence or a more complex relationship.  Note this is for a quick reference, not an exhaustive one.
+
+
+## Matern class
+
+Note that covariance functions are written identically in slightly different ways in different sources, and this is just one representation.  See the Rasmussen and Williams link for details.
+
+$$h^2\frac{2^{1-\nu}}{\Gamma(\nu)}(2\sqrt{\nu}\frac{|x_i-x_j|}{\lambda})\mathcal{B}_\nu(2\sqrt{\nu}\frac{|x_i-x_j|}{\lambda})$$
+
+- $\lambda$ = horizontal/input length-scale
+- $h$ = vertical/output length-scale
+- $\nu$ = controls differentiability
+- $\Gamma$ = Gamma function
+- $\mathcal{B}$ = modified Bessel function
 
 ## Labels
 
-GP = Gaussian process
-Exp =  exponential covariance structure
-SqExp = squared exponential covariance structure
-Matern = Matern covariances structure
-OU = Ornstein-Uhlenbeck
-$\mathcal{l}$ = horizontal length-scale
-$\mathcal{\nu}$ = controls differentiability
+- GP = Gaussian process
+- Matern = Matern covariance structure
+- Exp =  exponential covariance structure $h^2\exp(-\frac{|x_i-x_j|}{\lambda})$
+- SqExp = squared exponential covariance structure $h^2\exp[-(\frac{|x_i-x_j|}{\lambda})^2]$
+- RQ = rational quadratic covariance structure $h^2(1 + \frac{|x_i-x_j|^2}{\alpha\lambda^2})^{-\alpha}$
+- Other = other covariance functions
+- OU = Ornstein-Uhlenbeck process
+- GAM = generalized additive models
+- Splines = piecewise polynomial, regression splines
+- SVM = support vector machines
+- NN = neural networks
+
 
 ## References
 
-Rasmussen & Williams (2006). Gaussian Processes for Machine Learning.
-Murphy (2012). Machine Learning: A probabilistic perspective.
+- Rasmussen & Williams (2006). [Gaussian Processes for Machine Learning](http://www.gaussianprocess.org/gpml).
+- Murphy (2012). Machine Learning: A probabilistic perspective.
+- [The kernel cookbook](http://www.cs.toronto.edu/~duvenaud/cookbook/); [pdf chapter](https://raw.githubusercontent.com/duvenaud/phd-thesis/master/kernels.pdf)
 
 ### Stack 
 
 [AR-OU](http://math.stackexchange.com/questions/345773/how-the-ornstein-uhlenbeck-process-can-be-considered-as-the-continuous-time-anal)
+
 [Covariance Functions](https://en.wikipedia.org/wiki/Gaussian_process#Usual_covariance_functions)
