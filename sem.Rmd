@@ -1,0 +1,108 @@
+---
+title: "Structural Equation Modeling"
+output: html_document
+---
+
+
+```{r gp, echo=F}
+library(DiagrammeR)
+sem_nodes = create_nodes(    
+  nodes = c('reg', 'GLM', 'mixed', 'econ', 'path', 'LV', 'otherLV', 'CFA', 'EFA', 'gm', 
+            'SEM', 'SCM', 'bn', 'networks'),
+  label = c('Regression', 'GLM', 'Mixed\nModels', 'Econometrics', 'Path\nAnalysis','Latent\nVariables', 'Other\nLV models', 'Confirmatory\nFA', 'Exploratory\nFA', 'Graphical\nModels', 
+            'SEM', 'SCM', 'Bayesian\nNetworks', 'Network\nAnalysis'),
+  # type = 'a',
+  # value = 1,
+  style = 'filled',
+  shape = 'circle',
+  fixedsize=T,
+  distortion='',
+  color='darkred',
+  fillcolor='papayawhip',
+  fixedsize='',
+  fontcolor='darkred',
+  fontname='Roboto',
+  fontsize=6,
+  height='',
+  penwidth='',
+  peripheries='',
+  sides='',
+  tooltip='',
+  width='',
+  x='',
+  y='')
+
+sem_edges = create_edges(
+  from = c('GLM', 'path', 'mixed', 'SEM','econ', 'path', 'SEM', 'SEM', 'LV', 'LV', 'LV','EFA', 'SCM', 
+           'SCM', 'gm', 'gm'),
+  to =   c('reg', 'GLM', 'GLM','mixed', 'reg', 'econ','path', 'LV', 'CFA', 'EFA', 'otherLV','CFA', 'bn', 
+           'SEM', 'SCM', 'networks'),
+  # rel = c('a'),
+  arrowhead='dot',
+  arrowsize='.5',
+  arrowtail='',
+  color='salmon',
+  dir=c('', '', '', 'none', '', '', '', '', '', '', '', 'none', '', '', '', ''),
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label='',
+  minlen='',
+  penwidth='2',
+  tailport='',
+  tooltip=c('GLM extends beyond normal', 'PA extends to multiple outcomes and indirect effects', 'Mixed models extend to dependent observations', 'Latent Growth Curve models in SEM are equivalent', '', '', 'SEM primarily combines latent variables with structural path models', 'SEM primarily combines latent variables with structural path models', '', '', '', 'CFA is EFA with some loadings constrained to equal 0', '', '', 'SCM are graphical models with causal implications', '')
+)
+
+save(sem_nodes, sem_edges, file='data/sem.RData')
+render_graph(create_graph(nodes_df = sem_nodes, edges_df = sem_edges, graph_name='Structural Equation Modeling'), height = 1000, width = 750)
+```
+
+
+## Connections to SEM
+
+Hover over the links for details on some connections.  Dots indicate 'special cases of' the parent node. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
+
+## Overview
+
+This shows SEM's place both as a generalization of other techniques and as part of a broader set of tools with graphical models. Path analysis extends standard linear models to incorporate indirect effects and multiple outcomes, possibly at the same time.  Latent variable modeling (including both continuous and categorical latent variables, the latter equivalent to mixture models) includes the poorly named CFA and EFA, even though they are equivalent except for some constrained parameters. Latent variable analysis is actually far more general and includes things like hidden Markov models, topic modeling etc., but which are not typically used in the SEM framework.  SEM combines latent variable models with path analysis, and potentially includes many other models (e.g. some mixed models can be modeled as latent growth curves). SEM is part of a larger modeling framework, Pearl's structured causal models, which includes Bayesian networks (though BN models don't have to be applied solely to causal models), and can be seen as graphical modeling with causal implication. By network analysis I mean many other graphical models regarding directed, undirected or mixed networks such as ERGM etc. which aren't normally considered under SCM.  And finally, everything's a graphical model of some kind.
+
+
+## Labels
+
+**Regression**: standard linear model
+
+**GLM**: generalized linear model
+
+**Mixed Model**: generalized linear mixed model
+
+**Econometrics**: econometric models like instrumental variable analysis, seemingly unrelated regression etc., i.e. not all of econometrics, which would include glm, links to mixed models etc., but those that would fall under path analysis more or less.
+
+**Path Analysis**: includes mediation models as in Imai.
+
+**Confirmatory FA**: Confirmatory factor analysis, typically employed with SEM specific programming tools.
+
+**Exploratory FA**: what most probably refer to when they say 'factor analysis' without qualification.  Includes common factor analysis.
+
+**Other LV models**: Other latent variable approaches such as LDA, HMM, mixture models, NNMF etc.
+
+**Latent Variables**: latent variable models (very generally)
+
+**SEM**: structural equation models
+
+**SCM**: structural causal models
+
+**Bayesian Networks**: directed, undirected or mixed graphical models often with no causal implications
+
+**Network Analysis**: a la centrality measures, cliques, ERGM etc.; often undirected and/or with no causal implications
+
+**Graphical Models**: most models in one way or another
+
+
+## References
+
+- [Judea Pearl's site](http://bayes.cs.ucla.edu/jp_home.html)
+- [Kosuke Imai's site](http://imai.princeton.edu/)
+- Shalizi's notebooks provide a nice synopsis and many references: [graphical models](http://bactra.org/notebooks/graphical-models.html), [graphical causal models](http://bactra.org/notebooks/graphical-causal-models.html), [factor models](http://bactra.org/notebooks/factor-models.html), [causality](http://bactra.org/notebooks/causality.html)
+- Bollen (1989) Structural Equations with Latent Variables.
+- Kline (2016) Principles and Practice of SEM. (intro)

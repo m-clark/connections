@@ -1,0 +1,92 @@
+---
+title: "Basics"
+output: html_document
+---
+
+
+```{r gp, echo=F}
+library(DiagrammeR)
+basics_nodes = create_nodes(    
+  nodes = c('mixed', 'GLM', 'reg', 'ttest', 'cor', 'anova', 'rmanova', 'manova', 'dfa', 'cancorr'),
+  label = c('Mixed\nModels', 'GLM', 'Regression', 't-test', 'correlation', 'ANOVA', 'Repeated\nMeasures', 'MANOVA', 'DFA', 'Canonical\nCorrelation'),
+  # type = 'a',
+  # value = 1,
+  style = 'filled',
+  shape = 'circle',
+  fixedsize=T,
+  distortion='',
+  color='darkred',
+  fillcolor='papayawhip',
+  fixedsize='',
+  fontcolor='darkred',
+  fontname='Roboto',
+  fontsize=6,
+  height='',
+  penwidth='',
+  peripheries='',
+  sides='',
+  tooltip='',
+  width='',
+  x='',
+  y='')
+
+basics_edges = create_edges(
+  from = c('mixed', 'mixed', 'GLM', 'reg', 'reg', 'anova', 'rmanova', 'ttest', 'manova', 'manova','cancorr', 'cancorr', 'cancorr'),
+  to =   c('rmanova', 'GLM', 'reg', 'anova', 'cor', 'ttest', 'anova', 'cor', 'anova', 'dfa', 'manova', 'dfa', 'reg'),
+  # rel = c('a'),
+  arrowhead='dot',
+  arrowsize='.5',
+  arrowtail='',
+  color='salmon',
+  dir=c('', '', '', '', '', '', '', 'none', '', 'none', '', '', ''),
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label='',
+  minlen='',
+  penwidth='2',
+  tailport='',
+  tooltip=c('Mixed models can deal with dependency beyond repeated measures', 'Mixed models extend to dependent observations', 'GLM extends beyond normal', 'Regression can include mixed predictor types', 'Regression can examine correlations in multivariate settings', 'ANOVA can utilize variables with more than two groups and multiple variables', '', '', 'MANOVA extends to multiple DVS', 'MANOVA and DFA are equivalent models', 'Canonical correlation is correlation among two *sets* of variables, one of which may include binary indicators of group membership', 'Canonical correlation is correlation among two *sets* of variables, one of which may include binary indicators of group membership', 'Regression can be seen as canonical correlation in which one set of variables has only one member. If both sets have only one member, the Canonical Correlation is equivalent to the Pearson correlation.')
+)
+save(basics_nodes, basics_edges, file='data/basics.RData')
+render_graph(create_graph(nodes_df = basics_nodes, edges_df = basics_edges, graph_name=''), height = 1000, width = 750)
+```
+
+
+## Connections among basic statistical models 
+
+Hover over the links for details on some connections.  Dots indicate 'special cases of' the parent node. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
+
+## Overview
+
+One can start with simple settings of two variables x and y, assuming y is the dependent variable.  To examine the relationship we might look at the correlation if they are numeric.  If we run a regression by first standardizing our x and y variables, the resulting coefficient for x is equal to the Pearson correlation coefficient. If x is a binary factor, we might use a t-test to examine the group means.  In the regression, the coefficient for x would equal the mean difference, and its t-statistic would be identical.  ANOVA extends the t-test to more than two groups and more than one variable, but is equivalent to standard regression with categorical predictors.  Repeated measures ANOVA extends standard ANOVA to deal with multiple measures per observation, but is a special case of mixed models. Generalized linear models extend the standard linear model to deal with distributions other than normal, and mixed models extend them to deal with dependent observations (e.g. due to repeated measures, but not restricted to that situation).  Also included are some traditional multivariate techniques; these really shouldn't be used anymore, but may provide additional context in case one has come across them.
+
+## Labels
+
+
+**Correlation**: simple Pearson correlation
+
+**Canonical correlation**: Canonical correlation
+
+**t-test**: standard t-test
+
+**ANOVA**: analysis of variance
+
+**MANOVA**: multivariate ANOVA
+
+**DFA**: discriminant function analysis
+
+**Repeated** Measures: ANOVA models with repeated measures and/or 'mixed' design
+
+**Regression**: standard linear model
+
+**GLM**: generalized linear models
+
+**Mixed Models**: generalized linear mixed models
+
+
+
+## References
+
+- Practically any traditional introductory statistics text, and any traditional 'multivariate' text.

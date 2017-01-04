@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-```{r gp, echo=F}
+```{r gp, echo=F, fig.ext='svg'}
 library(DiagrammeR)
 gp_nodes = create_nodes(    
   nodes = c('gpm','gpsq', 'gpexp', 'gprq', 'gplin', 'gpother', 'GP', 
@@ -74,6 +74,8 @@ gp_edges = create_edges(
 )
 save(gp_nodes, gp_edges, file='data/gp.RData')
 render_graph(create_graph(gp_nodes, gp_edges, graph_name='Gaussian Processes'), height = 1000, width = 750)
+# pl = DiagrammeRsvg::export_svg(render_graph(create_graph(gp_nodes, gp_edges, graph_name='Gaussian Processes'), height = 1000, width = 750))
+# htmltools::html_print(htmltools::HTML(pl))
 ```
 
 ## Connections to Gaussian processes

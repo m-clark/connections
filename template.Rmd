@@ -1,0 +1,66 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+
+```{r gp, echo=F}
+library(DiagrammeR)
+nodes = create_nodes(    
+  nodes = c(''),
+  label = c(''),
+  # type = 'a',
+  # value = 1,
+  style = 'filled',
+  shape = 'circle',
+  fixedsize=T,
+  distortion='',
+  color='darkred',
+  fillcolor='papayawhip',
+  fixedsize='',
+  fontcolor='darkred',
+  fontname='Roboto',
+  fontsize=6,
+  height='',
+  penwidth='',
+  peripheries='',
+  sides='',
+  tooltip='',
+  width='',
+  x='',
+  y='')
+
+edges = create_edges(
+  from = c(''),
+  to =   c(''),
+  # rel = c('a'),
+  arrowhead='dot',
+  arrowsize='.5',
+  arrowtail='',
+  color='salmon',
+  dir=c(''),
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label='',
+  minlen='',
+  penwidth='2',
+  tailport='',
+  tooltip=c('')
+)
+
+# save(file='')
+render_graph(create_graph(nodes_df = nodes, edges_df = edges, graph_name=''), height = 1000, width = 750)
+```
+
+
+## Connections to 
+
+Hover over the links for details on *some* connections (i.e. not all edges have details).  Dots indicate 'special cases of' the parent node. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
+
+## Overview
+
+## Labels
+
+## References

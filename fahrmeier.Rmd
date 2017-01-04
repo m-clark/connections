@@ -1,0 +1,85 @@
+---
+title: "Structured Additive Regression Models"
+output: html_document
+---
+
+
+```{r star, echo=F}
+library(DiagrammeR)
+star_nodes = create_nodes(    
+  nodes = c('reg', 'GLM', 'GAM', 'mixed', 'star', 'spatial', 'GP'),
+  label = c('Regression', 'GLM', 'GAM', 'Mixed\nModels', 'STAR', 'Spatial', 'GP'),
+  # type = 'a',
+  # value = 1,
+  style = 'filled',
+  shape = 'circle',
+  fixedsize=T,
+  distortion='',
+  color='darkred',
+  fillcolor='papayawhip',
+  fixedsize='',
+  fontcolor='darkred',
+  fontname='Roboto',
+  fontsize=6,
+  height='',
+  penwidth='',
+  peripheries='',
+  sides='',
+  tooltip='',
+  width='',
+  x='',
+  y='')
+
+star_edges = create_edges(
+  from = c('GP', 'star', 'star', 'star', 'GAM', 'spatial', 'GAM','mixed', 'GAM', 'spatial', 'GLM'),
+  to =   c('star', 'GAM', 'mixed', 'spatial', 'mixed', 'mixed', 'spatial','GLM', 'GLM', 'GLM', 'reg'),
+  # rel = c('a'),
+  arrowhead='dot',
+  arrowsize='.5',
+  arrowtail='',
+  color='salmon',
+  dir=c('none', '', '', '', 'none', 'none', 'none', '', '', '', ''),
+  fontcolor='',
+  fontname='',
+  fontsize='',
+  headport='',
+  label='',
+  minlen='',
+  penwidth='2',
+  tailport='',
+  tooltip=c('', '', '', '', '', '', '', 'add other correlation structure', 'add nonlinear effects', 'add spatial correlation structure', 'GLM extends beyond normal distribution')
+)
+
+save(star_nodes, star_edges, file='data/star.RData')
+render_graph(create_graph(nodes_df = star_nodes, edges_df = star_edges, graph_name='Structured Additive Regression Models'), height = 1000, width = 750)
+```
+
+
+## Connections among various regression models 
+
+This graph represents models covered in Farhmeier et al., though I add the Gaussian process connection beyond spatial regression. Hover over the links for details on some connections.  Dots indicate 'special cases of' the parent node. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
+
+## Overview
+
+The text builds up from standard regression models to additive models incorporating nonlinear effects, mixed models that can take on hierarchical and other correlation structure, and spatial models.  These latter three can be arbitrarily combined in a penalized regression approach, and Farhmeier et al. refer to these as *structured additive regression* models. Various forms of these can be seen as Gaussian process models employing specific covariance structures.  Wood's <span class="pack">mgcv</span> incorporates STAR models of many kinds.
+
+## Labels
+
+**Regression**: standard linear model
+
+**GLM**: generalized linear model
+
+**Mixed Model**: generalized linear mixed model
+
+**GAM**: generalized additive models
+
+**Spatial**: standard spatial regression models, e.g. kriging
+
+**STAR**: structured additive regression model
+
+**GP**: Gaussian process
+
+## References
+
+- Farhmeier et al. (2013) Regression.
+- Wood, S. (2006) Generalized Additive Models: An Introduction with R.
