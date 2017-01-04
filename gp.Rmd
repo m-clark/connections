@@ -33,7 +33,7 @@ gp_nodes = create_nodes(
   x='',
   y='')
 
-edges = create_edges(
+gp_edges = create_edges(
   from = c('gpm','ou', 'gpm','gpexp','gpm','rkhs','GP', 'gprq','GP', 'gpother', 
            'SVM', 'NN', 'gpother', 'GAM', 'gpsq', 'GP', 'gplin', 'GP'),
   to =   c('ar1','ar1', 'gpsq', 'ou','gpexp', 'GP', 'gpm','gpsq', 'gpother', 'splines', 
@@ -53,11 +53,11 @@ edges = create_edges(
   minlen='',
   penwidth='2',
   tailport='',
-  tooltip=c('Matern with ν fixed to p-1/2', 
+  tooltip=c('Matern with &nu; fixed to p-1/2', 
             'AR(p) is discretized version of OU', 
-            'Matern with ν = &infin;',
+            'Matern with &nu; = &infin;',
             '&equiv;',
-            'Matern with ν = 1/2',
+            'Matern with &nu; = 1/2',
             '',
             '',
             'RQ is a mixture of SQExp; &alpha; = &infin;',
@@ -72,7 +72,8 @@ edges = create_edges(
             '&equiv;',
             '')
 )
-render_graph(create_graph(gp_nodes, edges, graph_name='Gaussian Processes'), height = 1000, width = 750)
+save(gp_nodes, gp_edges, file='data/gp.RData')
+render_graph(create_graph(gp_nodes, gp_edges, graph_name='Gaussian Processes'), height = 1000, width = 750)
 ```
 
 ## Connections to Gaussian processes
@@ -95,34 +96,34 @@ $\nu$ = controls differentiability
 
 $\Gamma$ = Gamma function
 
-$\mathcal{B}$ = modified Bessel function
+$\mathcal{B}$ = modified Bessel function of the second kind
 
 ## Labels
 
 
-**GP** = Gaussian process
+**GP**: Gaussian process
 
-**Matern** = Matern covariance structure
+**Matern**: Matern covariance structure
 
-**Exp** =  exponential covariance structure $h^2\exp(-\frac{|x_i-x_j|}{\lambda})$
+**Exp**:  exponential covariance structure $h^2\exp(-\frac{|x_i-x_j|}{\lambda})$
 
-**SqExp** = squared exponential covariance structure $h^2\exp[-(\frac{|x_i-x_j|}{\lambda})^2]$
+**SqExp**: squared exponential covariance structure $h^2\exp[-(\frac{|x_i-x_j|}{\lambda})^2]$
 
-**RQ** = rational quadratic covariance structure $h^2(1 + \frac{|x_i-x_j|^2}{\alpha\lambda^2})^{-\alpha}$
+**RQ**: rational quadratic covariance structure $h^2(1 + \frac{|x_i-x_j|^2}{\alpha\lambda^2})^{-\alpha}$
 
-**Other** = other covariance functions
+**Other**: other covariance functions
 
-**OU** = Ornstein-Uhlenbeck process
+**OU**: Ornstein-Uhlenbeck process
 
-**GAM** = generalized additive models
+**GAM**: generalized additive models
 
-**Splines** = piecewise polynomial, regression splines
+**Splines**: piecewise polynomial, regression splines
 
-**SVM** = support vector machines
+**SVM**: support vector machines
 
-**NN** = neural networks
+**NN**: neural networks
 
-**RKHS** = reproducing kernel hilbert space
+**RKHS**: reproducing kernel hilbert space
 
 
 ## References
