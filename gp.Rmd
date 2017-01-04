@@ -10,9 +10,9 @@ gp_nodes = create_nodes(
   nodes = c('gpm','gpsq', 'gpexp', 'gprq', 'gplin', 'gpother', 'GP', 
             'rkhs','ar1','ou', 'splines', 'GAM', 'SVM', 'NN', 'bayesreg'),
   label = c('GP w/ Matern', 'GP w/ SqExp', 'GP w/ Exp', 'GP w/ RQ', 'GP w/ linear', 'GP w/ Other', 'GP', 
-            'RKHS', 'AR(p)', 'OU', 'Splines', 'GAM', 'SVM', 'NN', 'Bayesian \n Regression'),
-  type = 'a',
-  value = 1,
+            'RKHS', 'AR(p)', 'OU', 'Splines', 'GAM', 'SVM', 'NN', 'Bayesian\nRegression'),
+  # type = 'a',
+  # value = 1,
   
   style = 'filled',
   shape = 'circle',
@@ -27,7 +27,6 @@ gp_nodes = create_nodes(
   height='',
   penwidth='',
   peripheries='',
-  shape='',
   sides='',
   tooltip='',
   width='',
@@ -39,8 +38,7 @@ edges = create_edges(
            'SVM', 'NN', 'gpother', 'GAM', 'gpsq', 'GP', 'gplin', 'GP'),
   to =   c('ar1','ar1', 'gpsq', 'ou','gpexp', 'GP', 'gpm','gpsq', 'gpother', 'splines', 
            'gpother', 'gpother', 'GAM', 'splines', 'gpexp', 'gplin', 'bayesreg', 'gprq'),
-  rel = c('a'),
-
+  # rel = c('a'),
   arrowhead='dot',
   arrowsize='.5',
   arrowtail='',
@@ -51,14 +49,14 @@ edges = create_edges(
   fontname='',
   fontsize='',
   headport='',
-  label=c('', ''),
+  label=rep('&nbsp;', length=18),
   minlen='',
-  penwidth='1.5',
+  penwidth='2',
   tailport='',
   tooltip=c('Matern with ν fixed to p-1/2', 
             'AR(p) is discretized version of OU', 
             'Matern with ν = &infin;',
-            '',
+            '&equiv;',
             'Matern with ν = 1/2',
             '',
             '',
@@ -69,41 +67,62 @@ edges = create_edges(
             '',
             'thin plate, duchon spline',
             '',
+            '',
+            '',
+            '&equiv;',
             '')
 )
-render_graph(create_graph(gp_nodes, edges), height = 1200, width = 750)
+render_graph(create_graph(gp_nodes, edges, graph_name='Gaussian Processes'), height = 1000, width = 750)
 ```
 
 ## Connections to Gaussian processes
 
-Hover over the links for details on some connections.  Dots indicate 'special cases of'. Undirected connections suggest equivalence or a more complex relationship.  Note this is for a quick reference, not an exhaustive one.
+Hover over the links for details on some connections.  Dots indicate 'special cases of'. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
 
 
-## Matern class
+#### Matern class
 
 Note that covariance functions are written identically in slightly different ways in different sources, and this is just one representation.  See the Rasmussen and Williams link for details.
 
 $$h^2\frac{2^{1-\nu}}{\Gamma(\nu)}(2\sqrt{\nu}\frac{|x_i-x_j|}{\lambda})\mathcal{B}_\nu(2\sqrt{\nu}\frac{|x_i-x_j|}{\lambda})$$
 
-- $\lambda$ = horizontal/input length-scale
-- $h$ = vertical/output length-scale
-- $\nu$ = controls differentiability
-- $\Gamma$ = Gamma function
-- $\mathcal{B}$ = modified Bessel function
+
+$\lambda$ = horizontal/input length-scale
+
+$h$ = vertical/output length-scale
+
+$\nu$ = controls differentiability
+
+$\Gamma$ = Gamma function
+
+$\mathcal{B}$ = modified Bessel function
 
 ## Labels
 
-- GP = Gaussian process
-- Matern = Matern covariance structure
-- Exp =  exponential covariance structure $h^2\exp(-\frac{|x_i-x_j|}{\lambda})$
-- SqExp = squared exponential covariance structure $h^2\exp[-(\frac{|x_i-x_j|}{\lambda})^2]$
-- RQ = rational quadratic covariance structure $h^2(1 + \frac{|x_i-x_j|^2}{\alpha\lambda^2})^{-\alpha}$
-- Other = other covariance functions
-- OU = Ornstein-Uhlenbeck process
-- GAM = generalized additive models
-- Splines = piecewise polynomial, regression splines
-- SVM = support vector machines
-- NN = neural networks
+
+**GP** = Gaussian process
+
+**Matern** = Matern covariance structure
+
+**Exp** =  exponential covariance structure $h^2\exp(-\frac{|x_i-x_j|}{\lambda})$
+
+**SqExp** = squared exponential covariance structure $h^2\exp[-(\frac{|x_i-x_j|}{\lambda})^2]$
+
+**RQ** = rational quadratic covariance structure $h^2(1 + \frac{|x_i-x_j|^2}{\alpha\lambda^2})^{-\alpha}$
+
+**Other** = other covariance functions
+
+**OU** = Ornstein-Uhlenbeck process
+
+**GAM** = generalized additive models
+
+**Splines** = piecewise polynomial, regression splines
+
+**SVM** = support vector machines
+
+**NN** = neural networks
+
+**RKHS** = reproducing kernel hilbert space
 
 
 ## References
@@ -112,8 +131,7 @@ $$h^2\frac{2^{1-\nu}}{\Gamma(\nu)}(2\sqrt{\nu}\frac{|x_i-x_j|}{\lambda})\mathcal
 - Murphy (2012). Machine Learning: A probabilistic perspective.
 - [The kernel cookbook](http://www.cs.toronto.edu/~duvenaud/cookbook/); [pdf chapter](https://raw.githubusercontent.com/duvenaud/phd-thesis/master/kernels.pdf)
 
-### Stack 
+#### Stack 
 
-[AR-OU](http://math.stackexchange.com/questions/345773/how-the-ornstein-uhlenbeck-process-can-be-considered-as-the-continuous-time-anal)
-
-[Covariance Functions](https://en.wikipedia.org/wiki/Gaussian_process#Usual_covariance_functions)
+- [AR-OU](http://math.stackexchange.com/questions/345773/how-the-ornstein-uhlenbeck-process-can-be-considered-as-the-continuous-time-anal)
+- [Covariance Functions](https://en.wikipedia.org/wiki/Gaussian_process#Usual_covariance_functions)
