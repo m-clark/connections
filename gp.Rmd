@@ -18,7 +18,7 @@ gp_nodes = create_nodes(
   shape = 'circle',
   fixedsize=T,
   distortion='',
-  color='darkred',
+  color=c(rep('#8B000040', 6), 'lightblue', rep('#8B000040', 20)),
   fillcolor='papayawhip',
   fixedsize='',
   fontcolor='darkred',
@@ -26,7 +26,7 @@ gp_nodes = create_nodes(
   fontsize=6,
   height='',
   penwidth='',
-  peripheries='',
+  peripheries=c(rep('1', 6), '4'),
   sides='',
   tooltip='',
   width='',
@@ -42,7 +42,7 @@ gp_edges = create_edges(
   arrowhead='dot',
   arrowsize='.5',
   arrowtail='',
-  color='salmon',
+  color= '#FA8072BF', #'#8B000040',
   dir=c('', '','', 'none', '', 'none', '', '', '', '', 
         'none', 'none', '', '', '', '', 'none', ''),
   fontcolor='',
@@ -80,7 +80,7 @@ render_graph(create_graph(gp_nodes, gp_edges, graph_name='Gaussian Processes'), 
 
 ## Connections to Gaussian processes
 
-Hover over the links for details on some connections.  Dots indicate 'special cases of'. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
+Hover over the links for details on *some* connections (i.e. not all edges have details).  Dots indicate 'special cases of' the parent node. Undirected connections suggest equivalence (&equiv; on hover) or a more complex relationship (usually for more general/more complex models).  Note this is for a quick reference, not an exhaustive one.
 
 
 #### Matern class

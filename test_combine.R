@@ -1,6 +1,7 @@
 load('data/gp.RData')
 load('data/star.RData')
 load('data/basics.RData')
+load('data/sem.RData')
 
 
 
@@ -15,7 +16,12 @@ combo_edges = rbind(basics_edges, gp_edges, star_edges, sem_edges)
 
 # remove dupe edges
 library(tidyverse)
-dup_index = duplicated(combo_edges %>% select(from, to))
 
-render_graph(create_graph(combo_nodes, filter(combo_edges, !dup_index)))
+dup_index_nodes = duplicated(combo_nodes %>% select(nodes))
+dup_index_edges = duplicated(combo_edges %>% select(from, to))
+
+g = create_graph(filter(combo_nodes, !dup_index_nodes), filter(combo_edges, !dup_index_edges))
+render_graph(g)
+# render_graph(create_graph(combo_nodes, filter(combo_edges, !dup_index_edges)))
+
 
