@@ -7,8 +7,8 @@ output: html_document
 ```{r star, echo=F}
 library(DiagrammeR)
 star_nodes = create_nodes(    
-  nodes = c('reg', 'GLM', 'GAM', 'mixed', 'star', 'spatial', 'GP'),
-  label = c('Regression', 'GLM', 'GAM', 'Mixed\nModels', 'STAR', 'Spatial', 'GP'),
+  nodes = c('reg', 'GLM', 'GAM', 'mixed', 'star', 'spatial', 'GP', 'quant'),
+  label = c('Regression', 'GLM', 'GAM', 'Mixed\nModels', 'STAR', 'Spatial', 'GP', 'Quantile'),
   # type = 'a',
   # value = 1,
   style = 'filled',
@@ -31,8 +31,8 @@ star_nodes = create_nodes(
   y='')
 
 star_edges = create_edges(
-  from = c('GP', 'star', 'star', 'star', 'GAM', 'spatial', 'GAM','mixed', 'GAM', 'spatial', 'GLM'),
-  to =   c('star', 'GAM', 'mixed', 'spatial', 'mixed', 'mixed', 'spatial','GLM', 'GLM', 'GLM', 'reg'),
+  from = c('GP', 'star', 'star', 'star', 'GAM', 'spatial', 'GAM','mixed', 'GAM', 'spatial', 'GLM', 'quant'),
+  to =   c('star', 'GAM', 'mixed', 'spatial', 'mixed', 'mixed', 'spatial','GLM', 'GLM', 'GLM', 'reg', 'reg'),
   # rel = c('a'),
   arrowhead='dot',
   arrowsize='.5',
