@@ -1,2 +1,6 @@
-# connections
-connections among various statistical methods
+# Connections
+
+Connections among various statistical methods. Note that in these depictions, no attempt is made to graph all possible connections, or there would be some relation among almost all techniques.  Rather, a specific perspective is chosen, and any simplifying steps to keep the graph clean are taken.  Overviews in specific docs provide further context.
+
+![](combo.png)
+

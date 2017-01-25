@@ -8,9 +8,9 @@ output: html_document
 library(DiagrammeR)
 sem_nodes = create_nodes(    
   nodes = c('reg', 'GLM', 'mixed', 'econ', 'path', 'LV', 'otherLV', 'CFA', 'EFA', 'gm', 
-            'SEM', 'SCM', 'bn', 'networks'),
+            'SEM', 'SCM', 'bn', 'networks', 'POF'),
   label = c('Regression', 'GLM', 'Mixed\nModels', 'Econometrics', 'Path\nAnalysis','Latent\nVariables', 'Other\nLV models', 'Confirmatory\nFA', 'Exploratory\nFA', 'Graphical\nModels', 
-            'SEM', 'SCM', 'Bayesian\nNetworks', 'Network\nAnalysis'),
+            'SEM', 'SCM', 'Bayesian\nNetworks', 'Network\nAnalysis', 'POF'),
   # type = 'a',
   # value = 1,
   style = 'filled',
@@ -33,16 +33,16 @@ sem_nodes = create_nodes(
   y='')
 
 sem_edges = create_edges(
-  from = c('GLM', 'path', 'mixed', 'SEM','econ', 'path', 'SEM', 'SEM', 'LV', 'LV', 'LV','EFA', 'SCM', 
-           'SCM', 'gm', 'gm'),
-  to =   c('reg', 'GLM', 'GLM','mixed', 'reg', 'econ','path', 'LV', 'CFA', 'EFA', 'otherLV','CFA', 'bn', 
-           'SEM', 'SCM', 'networks'),
+  from = c('GLM', 'path', 'mixed', 'SEM','econ', 'path', 'SEM', 'SEM', 'LV', 'LV', 
+           'LV','EFA', 'SCM', 'SCM', 'gm', 'gm', 'SEM', 'SCM'),
+  to =   c('reg', 'GLM', 'GLM','mixed', 'reg', 'econ','path', 'LV', 'CFA', 'EFA', 
+           'otherLV','CFA', 'bn', 'SEM', 'SCM', 'networks', 'POF', 'POF'),
   # rel = c('a'),
   arrowhead='dot',
   arrowsize='.5',
   arrowtail='',
   color='#FA8072BF',
-  dir=c('', '', '', 'none', '', '', '', '', '', '', '', 'none', '', '', '', ''),
+  dir=c('', '', '', 'none', '', '', '', '', '', '', '', 'none', '', '', '', '', 'none'),
   fontcolor='',
   fontname='',
   fontsize='',
@@ -51,7 +51,7 @@ sem_edges = create_edges(
   minlen='',
   penwidth='2',
   tailport='',
-  tooltip=c('GLM extends beyond normal', 'PA extends to multiple outcomes and indirect effects', 'Mixed models extend to dependent observations', 'Latent Growth Curve models in SEM are equivalent', '', '', 'SEM primarily combines latent variables with structural path models', 'SEM primarily combines latent variables with structural path models', '', '', '', 'CFA is EFA with some loadings constrained to equal 0', '', '', 'SCM are graphical models with causal implications', '')
+  tooltip=c('GLM extends beyond normal', 'PA extends to multiple outcomes and indirect effects', 'Mixed models extend to dependent observations', 'Latent Growth Curve models in SEM are equivalent', '', '', 'SEM primarily combines latent variables with structural path models', 'SEM primarily combines latent variables with structural path models', '', '', '', 'CFA is EFA with some loadings constrained to equal 0', '', '', 'SCM are graphical models with causal implications', '', 'SEM and POF are logically equivalent', '')
 )
 
 save(sem_nodes, sem_edges, file='data/sem.RData')
@@ -89,6 +89,8 @@ This shows SEM's place both as a generalization of other techniques and as part 
 **Latent Variables**: latent variable models (very generally)
 
 **SEM**: structural equation models
+
+**POF**: potential outcomes framework
 
 **SCM**: structural causal models
 
