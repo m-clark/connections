@@ -4,3 +4,6 @@ Connections among various statistical methods. Note that in these depictions, no
 
 ![](combo.png)
 
+
+Currently on hold as a recent Diagrammer update removed functionality and altered functions that made this process much simpler.
+
