@@ -123,7 +123,7 @@ $\mathcal{B}$ = modified Bessel function of the second kind
 
 **SVM**: support vector machines
 
-**NN**: neural networks
+**NN**: neural networks (infinitely wide single hidden layer -> GP)
 
 **RKHS**: reproducing kernel hilbert space
 
